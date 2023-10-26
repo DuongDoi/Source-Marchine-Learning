@@ -2,7 +2,7 @@ import pandas as pd #Thư viện pandas để xử lí dữ liệu
 from sklearn.model_selection import train_test_split #Dùng để chia dữ liệu thành tập huấn luyện và tập kiểm tra
 from sklearn.linear_model import LinearRegression #Nhập vào mô hình hồi quy tuyến tính
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score #Nhập vào các hàm đánh giá mô hình
-import matplotlib.pyplot as plt #Dùng để biểu diễ mô hình
+import matplotlib.pyplot as plt #Dùng để biểu diễn mô hình
 import numpy as np
 
 # Đọc dữ liệu
@@ -42,9 +42,15 @@ r2 = r2_score(y_test, y_pred)
 
 # In ra các chỉ số
 print("Linear Regression:")
+#Hệ số (coefficients) của mô hình
+print("Hệ số (coefficients):", model.coef_)
+#Sai số tuyệt đối trung bình (Mean Absolute Error - MAE)
 print("Mean Absolute Error (MAE):", mae)
+#Sai số bình phương trung bình (Mean Squared Error - MSE)
 print("Mean Squared Error (MSE):", mse)
+#Độ lệch chuẩn (Root Mean Squared Error - RMSE)
 print("Root Mean Squared Error (RMSE):", rmse)
+#Hệ số xác định (R-squared - R^2) - Đo lường mức độ mô hình phù hợp với dữ liệu
 print("R-squared (R^2) Score:", r2)
 
 
@@ -62,7 +68,17 @@ new_data = pd.DataFrame({
 # Sử dụng mô hình đã huấn luyện để dự đoán
 new_predictions = model.predict(new_data)
 
-# Đưa ra dự đoán
+#Đưa ra thông số trên tập kiểm tra
+print("\n------------------------------------------------")
+print("-------------------SO LIEU TEST-------------------")
+print("Thuc te         Du doan                    Do lech")
+for i in range(len(y_test)):
+    actual = y_test.iloc[i]
+    predicted = y_pred[i]
+    absolute_error = abs(actual - predicted)
+    print(f"{actual}   {predicted}   {absolute_error}") 
+
+# Đưa ra dự đoán bộ dữ liệu mới
 print("\n*****************************\n*****DU DOAN BO DU LIEU MOI****")
 print("-----------Giai thich cac tham so------------------")
 print("Tuoi:  1. <18  2. 18-30  3. 31-50  4. >=51")
@@ -77,7 +93,9 @@ for i, prediction in enumerate(new_predictions):
     print(f"Bo du lieu {i + 1}: {new_data.iloc[i].to_dict()}")
     print(f"Gia tri du doan: {prediction}")
     print("")
-  
+
+
+ 
   
   
     
