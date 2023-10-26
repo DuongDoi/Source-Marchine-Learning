@@ -95,15 +95,11 @@ for i, prediction in enumerate(new_predictions):
     print("")
 
 
- 
-  
-  
-    
+#Trực quan kết quả
 # Dự đoán trên tập huấn luyện và tập kiểm tra
 y_train_pred = model.predict(X_train)
 y_test_pred = model.predict(X_test)
 
-# Vẽ đường hồi quy cho cả tập huấn luyện và tập kiểm tra
 plt.figure(num=('Group - Linear Regression - Traffic'),figsize=(10, 5))
 
 # Vẽ đường hồi quy cho tập huấn luyện
