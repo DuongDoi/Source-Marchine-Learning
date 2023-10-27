@@ -8,7 +8,7 @@ import numpy as np
 read = pd.read_excel('DataML.xlsx')
 
 # Số lượng bộ dữ liệu bạn muốn thử
-n_samples_to_try = 378
+n_samples_to_try = 350
 
 # Khởi tạo biến để lưu giá trị R-squared cao nhất và số lượng bộ dữ liệu tương ứng
 best_r2 = -1
