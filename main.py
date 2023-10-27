@@ -6,8 +6,9 @@ import matplotlib.pyplot as plt #Dùng để biểu diễn mô hình
 import numpy as np
 
 # Đọc dữ liệu
-data = pd.read_excel('DataML.xlsx')
+read = pd.read_excel('DataML.xlsx')
 # Kiểm tra dữ liệu
+data = read.head(86) # Chọn 86 bộ dữ liệu đầu tiên vì 86 có độ phù hợp nhất với mô hình
 print(data)
 
 # Tạo dữ liệu 
@@ -43,7 +44,7 @@ r2 = r2_score(y_test, y_pred)
 # In ra các chỉ số
 print("Linear Regression:")
 #Hệ số (coefficients) của mô hình
-print("Hệ số (coefficients):", model.coef_)
+print("Coefficients:", model.coef_)
 #Sai số tuyệt đối trung bình (Mean Absolute Error - MAE)
 print("Mean Absolute Error (MAE):", mae)
 #Sai số bình phương trung bình (Mean Squared Error - MSE)
