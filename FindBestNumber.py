@@ -1,3 +1,4 @@
+#Đây là bài toán tìm số lượng mẫu phù hợp nhất với bài toán với bộ dữ liệu đã cho
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
