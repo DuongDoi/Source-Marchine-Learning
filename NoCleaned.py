@@ -1,3 +1,4 @@
+#Chưa tối ưu hóa
 import pandas as pd #Thư viện pandas để xử lí dữ liệu 
 from sklearn.model_selection import train_test_split #Dùng để chia dữ liệu thành tập huấn luyện và tập kiểm tra
 from sklearn.linear_model import LinearRegression #Nhập vào mô hình hồi quy tuyến tính
