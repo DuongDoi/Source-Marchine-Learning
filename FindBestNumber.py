@@ -1,3 +1,4 @@
+#Đây là bài toán tìm số lượng mẫu trong bộ dữ liệu phù hợp nhất với mô hình
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
@@ -8,7 +9,7 @@ import numpy as np
 read = pd.read_excel('DataML.xlsx')
 
 # Số lượng bộ dữ liệu bạn muốn thử
-n_samples_to_try = 348
+n_samples_to_try = 350
 
 # Khởi tạo biến để lưu giá trị R-squared cao nhất và số lượng bộ dữ liệu tương ứng
 best_r2 = -1
