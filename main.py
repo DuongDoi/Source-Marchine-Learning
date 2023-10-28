@@ -83,7 +83,7 @@ for i in range(len(y_test)):
 print("\n*****************************\n*****DU DOAN BO DU LIEU MOI****")
 print("-----------Giai thich cac tham so------------------")
 print("Tuoi:  1. <18  2. 18-30  3. 31-50  4. >=51")
-print("Gioi tinh:  0. Famale  1. Male")
+print("Gioi tinh:  0. Female  1. Male")
 print("Kinh nghiem lai xe:  0. Khong co bang lai xe   1. Duoi 2 nam  2. Tren 2 nam")
 print("be mat duong:  1. Duong nhua  2. Duong dat")
 print("Anh sang:  1. Troi sang  2. Troi toi va khong co anh sang  3. Troi toi va co anh sang")
