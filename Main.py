@@ -118,7 +118,7 @@ def Dudoan():
 # Tạo cửa sổ giao diện
 window = tk.Tk()
 window.title("Dự đoán mức độ tai nạn giao thông")
-window.geometry("800x400")
+window.geometry("600x400")
 
 # CTạo các ô nhập liệu
 Tuoi_label = tk.Label(window, text="Tuoi")
