@@ -4,6 +4,7 @@ from sklearn.linear_model import LinearRegression #Nhập vào mô hình hồi q
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score #Nhập vào các hàm đánh giá mô hình
 import matplotlib.pyplot as plt #Dùng để biểu diễn mô hình
 import numpy as np
+import tkinter as tk #Thư viện tkinter tạo giao diện người dùng
 
 # Đọc dữ liệu
 read = pd.read_excel('DataML.xlsx')
@@ -81,11 +82,11 @@ for i in range(len(y_test)):
 
 # Đưa ra dự đoán bộ dữ liệu mới
 print("\n*****************************\n*****DU DOAN BO DU LIEU MOI****")
-print("-----------Giai thich cac tham so------------------")
+print("-----------Note------------------")
 print("Tuoi:  1. <18  2. 18-30  3. 31-50  4. >=51")
 print("Gioi tinh:  0. Female  1. Male")
 print("Kinh nghiem lai xe:  0. Khong co bang lai xe   1. Duoi 2 nam  2. Tren 2 nam")
-print("be mat duong:  1. Duong nhua  2. Duong dat")
+print("Be mat duong:  1. Duong nhua  2. Duong dat")
 print("Anh sang:  1. Troi sang  2. Troi toi va khong co anh sang  3. Troi toi va co anh sang")
 print("Thoi tiet:  1. Binh thuong  2.Gio manh  3. Nhieu may  4. Mua  5. Tuyet")
 print("Tinh trang lai xe:  1. Di au   2. Say ruou/bia  3. Di xe toc do cao\n")
@@ -94,6 +95,77 @@ for i, prediction in enumerate(new_predictions):
     print(f"Bo du lieu {i + 1}: {new_data.iloc[i].to_dict()}")
     print(f"Gia tri du doan: {prediction}")
     print("")
+
+#
+#Tạo giao diện người dùng để nhập dữ liệu và dự đoán kết quả
+#
+def Dudoan():
+    new_data = {
+        'Tuoi': int(_Tuoi.get()),
+        'GioiTinh': int(_GioiTinh.get()),
+        'KinhNghiemLaiXe': int(_KinhNghiemLaiXe.get()),
+        'BeMatDuong': int(_BeMatDuong.get()),
+        'AnhSang': int(_AnhSang.get()),
+        'ThoiTiet': int(_ThoiTiet.get()),
+        'NguyenNhanTaiNan': int(_NguyenNhan.get())
+    }
+    
+    new_data_df = pd.DataFrame(new_data, index=[0])
+    prediction = model.predict(new_data_df)
+    ketqua_label.config(text=f'Predicted Severity: {prediction[0]:.2f}')
+
+# Tạo cửa sổ giao diện
+window = tk.Tk()
+window.title("Dự đoán mức độ tai nạn giao thông")
+window.geometry("800x400")
+
+# CTạo các ô nhập liệu
+Tuoi_label = tk.Label(window, text="Tuoi")
+_Tuoi = tk.Entry(window)
+
+GioiTinh_label = tk.Label(window, text="Gioi Tinh (0. Nu, 1. Nam)")
+_GioiTinh = tk.Entry(window)
+
+KinhNghiemLaiXe_label = tk.Label(window, text="Kinh Nghiem Lai Xe (0. Khong co bang lai, 1. it hon 2 nam, 2. Nhieu hon 2 nam)")
+_KinhNghiemLaiXe = tk.Entry(window)
+
+BeMatDuong_label = tk.Label(window, text="Be Mat Duong (1. Duong Nhua, 2. Duong Dat)")
+_BeMatDuong = tk.Entry(window)
+
+AnhSang_label = tk.Label(window, text="Anh Sang (1. Ban ngay, 2. Toi va khong co anh sang, 3. Toi va co anh sang)")
+_AnhSang = tk.Entry(window)
+
+ThoiTiet_label = tk.Label(window, text="Thoi Tiet (1. Binh thuong, 2. Gio manh, 3. May, 4. Mua, 5. Tuyet)")
+_ThoiTiet = tk.Entry(window)
+
+NguyenNhan_label = tk.Label(window, text="Nguyen Nhan Tai Nan (1. Lai xe au, 2. Say ruou/bia, 3. Toc do cao)")
+_NguyenNhan = tk.Entry(window)
+
+DuDoan_button = tk.Button(window, text="Du Doan", command=Dudoan)
+
+ketqua_label = tk.Label(window, text="Ket Qua Du Doan: ")
+
+# Chạy giao diện
+Tuoi_label.grid(row=0, column=0)
+_Tuoi.grid(row=0, column=4)
+GioiTinh_label.grid(row=2, column=0)
+_GioiTinh.grid(row=2, column=4)
+KinhNghiemLaiXe_label.grid(row=4, column=0)
+_KinhNghiemLaiXe.grid(row=4, column=4)
+BeMatDuong_label.grid(row=6, column=0)
+_BeMatDuong.grid(row=6, column=4)
+AnhSang_label.grid(row=8, column=0)
+_AnhSang.grid(row=8, column=4)
+ThoiTiet_label.grid(row=10, column=0)
+_ThoiTiet.grid(row=10, column=4)
+NguyenNhan_label.grid(row=12, column=0)
+_NguyenNhan.grid(row=12, column=4)
+DuDoan_button.grid(row=14, column=0, columnspan=2)
+ketqua_label.grid(row=16, column=0, columnspan=2)
+
+window.mainloop()
+
+
 
 
 #Trực quan kết quả
@@ -120,5 +192,4 @@ plt.ylabel('Dự đoán')
 plt.title('Đường hồi quy cho tập kiểm tra')
 
 plt.tight_layout() 
-
 plt.show()
