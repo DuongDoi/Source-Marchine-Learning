@@ -1,4 +1,4 @@
-#Đây là bài toán tìm số lượng mẫu trong bộ dữ liệu phù hợp nhất với mô hình
+#Đây là bài toán tìm số lượng mẫu trong bộ dữ liệu phù hợp nhất với mô hình 
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
