@@ -45,9 +45,10 @@ r2 = r2_score(y_test, y_pred)
 
 # In ra các chỉ số
 print("Linear Regression:")
-#Hệ số (coefficients) của mô hình
+#Hệ số (coefficients) của mô hình <mức độ ảnh hưởng của thuộc tính đến kết quả>
 print("Coefficients:", model.coef_)
 #Sai số tuyệt đối trung bình (Mean Absolute Error - MAE)
+#<đo lường mức độ sai lệch trung bình giữa dự đoán của mô hình và giá trị thực tế trong tập dữ liệu kiểm tra>
 print("Mean Absolute Error (MAE):", mae)
 #Sai số bình phương trung bình (Mean Squared Error - MSE)
 print("Mean Squared Error (MSE):", mse)
