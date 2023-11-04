@@ -7,12 +7,15 @@ import matplotlib.pyplot as plt #Dùng để biểu diễn mô hình
 import numpy as np
 import tkinter as tk #Thư viện tkinter tạo giao diện người dùng
 
+
+#############################################
 # Đọc dữ liệu
 read = pd.read_excel('DataML.xlsx')
 # Kiểm tra dữ liệu
 data = read.head(86) # Chọn 86 bộ dữ liệu đầu tiên vì 86 có độ phù hợp nhất với mô hình
 print(data)
 
+#############################################
 # Tạo dữ liệu 
 X = data[['Tuoi', 'GioiTinh', 'KinhNghiemLaiXe', 'BeMatDuong', 'AnhSang', 'ThoiTiet', 'NguyenNhanTaiNan']]
 y = data['MucDoTaiNan']
@@ -29,7 +32,7 @@ model.fit(X_train, y_train)
 # Dự đoán trên tập kiểm tra
 y_pred = model.predict(X_test)
 
-
+#############################################
 #ĐÁNH GIÁ MÔ HÌNH
 #Đo lường trung bình của sai số tuyệt đối giữa dự đoán và giá trị thực tế
 mae = mean_absolute_error(y_test, y_pred)
@@ -43,6 +46,8 @@ rmse = np.sqrt(mse)
 #Sự biến đổi trong biến mục tiêu
 r2 = r2_score(y_test, y_pred)
 
+
+#############################################
 # In ra các chỉ số
 print("Linear Regression:")
 #Hệ số (coefficients) của mô hình <mức độ ảnh hưởng của thuộc tính đến kết quả>
@@ -58,6 +63,46 @@ print("Root Mean Squared Error (RMSE):", rmse)
 print("R-squared (R^2) Score:", r2)
 
 
+#############################################
+#Đưa ra thông số trên tập kiểm tra
+print("\n------------------------------------------------")
+print("-------------------SO LIEU TEST-------------------")
+print("Thuc te         Du doan                    Do lech")
+for i in range(len(y_test)):
+    actual = y_test.iloc[i]
+    predicted = y_pred[i]
+    absolute_error = abs(actual - predicted)
+    print(f"{actual}   {predicted}   {absolute_error}") 
+
+
+#############################################
+#Trực quan kết quả
+# Dự đoán trên tập huấn luyện và tập kiểm tra
+y_train_pred = model.predict(X_train)
+y_test_pred = model.predict(X_test)
+
+plt.figure(num=('Group - Linear Regression - Traffic'),figsize=(10, 5))
+
+# Vẽ đường hồi quy cho tập huấn luyện
+plt.subplot(1, 2, 1)
+plt.scatter(y_train, y_train_pred, c='blue', label='Training Data')
+plt.plot([min(y_train), max(y_train)], [min(y_train), max(y_train)], 'k--', lw=2)
+plt.xlabel('Giá trị thực tế')
+plt.ylabel('Dự đoán')
+plt.title('Đường hồi quy cho tập huấn luyện')
+
+# Vẽ đường hồi quy cho tập kiểm tra
+plt.subplot(1, 2, 2)
+plt.scatter(y_test, y_test_pred, c='red', label='Testing Data')
+plt.plot([min(y_test), max(y_test)], [min(y_test), max(y_test)], 'k--', lw=2)
+plt.xlabel('Giá trị thực tế')
+plt.ylabel('Dự đoán')
+plt.title('Đường hồi quy cho tập kiểm tra')
+
+plt.tight_layout() 
+plt.show()
+
+#############################################
 #Dự đoán bộ dữ liệu mới
 new_data = pd.DataFrame({
     'Tuoi': [1, 4, 2,3],  
@@ -71,16 +116,6 @@ new_data = pd.DataFrame({
 
 # Sử dụng mô hình đã huấn luyện để dự đoán
 new_predictions = model.predict(new_data)
-
-#Đưa ra thông số trên tập kiểm tra
-print("\n------------------------------------------------")
-print("-------------------SO LIEU TEST-------------------")
-print("Thuc te         Du doan                    Do lech")
-for i in range(len(y_test)):
-    actual = y_test.iloc[i]
-    predicted = y_pred[i]
-    absolute_error = abs(actual - predicted)
-    print(f"{actual}   {predicted}   {absolute_error}") 
 
 # Đưa ra dự đoán bộ dữ liệu mới
 print("\n*****************************\n*****DU DOAN BO DU LIEU MOI****")
@@ -98,7 +133,7 @@ for i, prediction in enumerate(new_predictions):
     print(f"Gia tri du doan: {prediction}")
     print("")
 
-#
+##############################################
 #Tạo giao diện người dùng để nhập dữ liệu và dự đoán kết quả
 #
 def Dudoan():
@@ -170,28 +205,3 @@ window.mainloop()
 
 
 
-#Trực quan kết quả
-# Dự đoán trên tập huấn luyện và tập kiểm tra
-y_train_pred = model.predict(X_train)
-y_test_pred = model.predict(X_test)
-
-plt.figure(num=('Group - Linear Regression - Traffic'),figsize=(10, 5))
-
-# Vẽ đường hồi quy cho tập huấn luyện
-plt.subplot(1, 2, 1)
-plt.scatter(y_train, y_train_pred, c='blue', label='Training Data')
-plt.plot([min(y_train), max(y_train)], [min(y_train), max(y_train)], 'k--', lw=2)
-plt.xlabel('Giá trị thực tế')
-plt.ylabel('Dự đoán')
-plt.title('Đường hồi quy cho tập huấn luyện')
-
-# Vẽ đường hồi quy cho tập kiểm tra
-plt.subplot(1, 2, 2)
-plt.scatter(y_test, y_test_pred, c='red', label='Testing Data')
-plt.plot([min(y_test), max(y_test)], [min(y_test), max(y_test)], 'k--', lw=2)
-plt.xlabel('Giá trị thực tế')
-plt.ylabel('Dự đoán')
-plt.title('Đường hồi quy cho tập kiểm tra')
-
-plt.tight_layout() 
-plt.show()
