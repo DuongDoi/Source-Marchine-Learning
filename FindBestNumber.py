@@ -9,7 +9,7 @@ import numpy as np
 read = pd.read_excel('DataML.xlsx')
 
 # Số lượng bộ dữ liệu bạn muốn thử
-n_samples_to_try = 350
+n_samples_to_try = 348
 
 # Khởi tạo biến để lưu giá trị R-squared cao nhất và số lượng bộ dữ liệu tương ứng
 best_r2 = -1
@@ -19,7 +19,7 @@ best_num_samples = 0
 for num_samples in range(10, n_samples_to_try + 1, 1):
     data = read.head(num_samples)
     
-    X = data[['Tuoi', 'GioiTinh', 'KinhNghiemLaiXe', 'BeMatDuong', 'AnhSang', 'ThoiTiet', 'NguyenNhanTaiNan']]+1
+    X = data[['Tuoi', 'GioiTinh', 'KinhNghiemLaiXe', 'BeMatDuong', 'AnhSang', 'ThoiTiet', 'NguyenNhanTaiNan']]
     y = data['MucDoTaiNan']
     
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
